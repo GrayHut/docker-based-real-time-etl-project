@@ -1,0 +1,24 @@
+{
+  "name": "cassandra-sink",
+  "config": {
+    "connector.class": "com.datastax.oss.kafka.sink.CassandraSinkConnector",
+    "tasks.max": "1",
+    "topics": "dbserver1.public.latest_prices,dbserver1.public.order_book,dbserver1.public.recent_trades,dbserver1.public.klines,dbserver1.public.ticker_24hr",
+    "contactPoints": "cassandra",
+    "port": 9042,
+    "loadBalancing.localDc": "datacenter1",
+    "maxConcurrentRequests": 500,
+    "maxNumberOfRecordsInBatch": 32,
+    "queryExecutionTimeout": 30,
+    "auth.provider": "None",
+    "topic.dbserver1.public.latest_prices.binance.latest_prices.mapping": "id=value.id, symbol=value.symbol, price=value.price, timestamp=value.timestamp",
+    "topic.dbserver1.public.order_book.binance.order_book.mapping": "id=value.id, symbol=value.symbol, bid_price=value.bid_price, bid_quantity=value.bid_quantity, ask_price=value.ask_price, ask_quantity=value.ask_quantity, timestamp=value.timestamp",
+    "topic.dbserver1.public.recent_trades.binance.recent_trades.mapping": "id=value.id, symbol=value.symbol, price=value.price, quantity=value.quantity, trade_time=value.trade_time, is_buyer_maker=value.is_buyer_maker, timestamp=value.timestamp",
+    "topic.dbserver1.public.klines.binance.klines.mapping": "id=value.id, symbol=value.symbol, open_time=value.open_time, open_price=value.open_price, high_price=value.high_price, low_price=value.low_price, close_price=value.close_price, volume=value.volume, close_time=value.close_time, timestamp=value.timestamp",
+    "topic.dbserver1.public.ticker_24hr.binance.ticker_24hr.mapping": "id=value.id, symbol=value.symbol, price_change=value.price_change, price_change_percent=value.price_change_percent, weighted_avg_price=value.weighted_avg_price, prev_close_price=value.prev_close_price, last_price=value.last_price, volume=value.volume, timestamp=value.timestamp",
+    "transforms": "unwrap",
+    "transforms.unwrap.type": "io.debezium.transforms.ExtractNewRecordState",
+    "key.converter": "org.apache.kafka.connect.storage.StringConverter",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter"
+  }
+}
