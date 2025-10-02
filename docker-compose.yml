@@ -35,9 +35,8 @@ services:
       POSTGRES_DB: binance_crypto_db
     volumes:
       - ./init-db.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./postgresql.conf:/etc/postgresql/postgresql.conf
       - postgres_data:/var/lib/postgresql/data
-    command: -c config_file=/etc/postgresql/postgresql.conf
+  
 
   kafka-connect:
     image: debezium/connect:2.5
